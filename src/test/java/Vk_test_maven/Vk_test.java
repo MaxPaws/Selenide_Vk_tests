@@ -2,13 +2,13 @@ package Vk_test_maven;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Vk_test {
 
     @BeforeAll
@@ -20,6 +20,7 @@ public class Vk_test {
 
     // Проверка нахождения на главной странице при загрузке
     @Test
+    @Order(1)
     public void checkIfIOnAStartPage(){
 
         // Заголовок должен совпадать с заголовком главной страницы
@@ -30,6 +31,7 @@ public class Vk_test {
 
     // Тестирование кнопки смены языка на английский на главной странице
     @Test
+    @Order(2)
     public void switchToEnglishButton(){
         SelenideElement switchBut = element("#top_switch_lang");
 
@@ -49,6 +51,7 @@ public class Vk_test {
 
     // Проверка негативного ввода у полей e-mail и password
     @Test
+    @Order(3)
     public void negative_SingInForm() {
         element("#index_email").setValue("mail");
         element("#index_pass").setValue("pass").pressEnter();
