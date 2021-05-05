@@ -1,6 +1,7 @@
 package Vk_test_maven;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -17,11 +18,33 @@ public class Vk_test {
         open("https://vk.com/");
     }
 
+    // Проверка нахождения на главной странице при загрузке
     @Test
     public void checkIfIOnAStartPage(){
+
+        // Заголовок должен совпадать с заголовком главной страницы
         element("title").shouldHave(attribute(
                 "text",
                 "Добро пожаловать | ВКонтакте"));
+    }
+
+    // Тестирование кнопки смены языка на английский на главной странице
+    @Test
+    public void switchToEnglishButton(){
+        SelenideElement switchBut = element("#top_switch_lang");
+
+        // Елемент должен быть виден
+        switchBut.shouldBe(visible);
+
+        switchBut.click();
+
+        // Елемент должен быть спрятан
+        switchBut.shouldNotBe(visible);
+
+        // Заголовок должен смениться на заголовок на английском языке
+        element("title").shouldHave(attribute(
+                "text",
+                "Welcome! | VK"));
     }
 
     // Проверка негативного ввода у полей e-mail и password
